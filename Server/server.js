@@ -24,9 +24,10 @@ let counter = 0;
         console.log(counter+' someone connected');
         counter++;
 
-        socket.on('close', function () {
+        socket.on('disconnect', function() {
             counter--;
-        })
+            console.log(counter+'Got disconnect!');
+        });
     });
 
 
