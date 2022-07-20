@@ -10,7 +10,6 @@ server.listen(port, () => {
     console.log("server running on " + port);
 });
 
-
 let counter = 0;//make a counter to find the amount of connected users
 io.on('connection', function (socket) { ///Add 1 each time a user connects
     console.log(counter + ' someone connected');
@@ -21,8 +20,13 @@ io.on('connection', function (socket) { ///Add 1 each time a user connects
         console.log(counter + 'Got disconnect!');
     });
 
-    socket.on('form', (message) =>{//observer that waits until the message "toAll" gets passed to the server
+    socket.on('toAll', (message) =>{//observer that waits until the message "toAll" gets passed to the server
         io.emit("displayMessage", (message));
+        console.log(message)
+    });
+
+    socket.on('toMe', (message) =>{//observer that waits until the message "toAll" gets passed to the server
+        socket.emit("displayMessage", (message));
         console.log(message)
     });
 });
