@@ -1,0 +1,45 @@
+#chatroom{
+    border: 5px solid deeppink;
+    background-color: forestgreen;
+    color: greenyellow;
+    padding: 10px;
+    margin: 10px 0;
+}
+ul {
+
+}
+#new-message{
+    border: 5px solid deeppink;
+    background-color: deeppink;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+#form {
+    background-color: yellowgreen;
+    padding: 20px;
+    margin: 5px;
+}
+
+#input{
+ width: 550px;
+    height: 50px;
+}
+
+#form>button{
+    background: yellowgreen;
+}
+
+#form::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#new-message button{
+
+}
+
+
+id new-message div
+
