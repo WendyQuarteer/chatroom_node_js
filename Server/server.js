@@ -29,7 +29,7 @@ io.on('connection', function (socket) {
         filter(user[socket.id]);
         io.emit ('active', activeUsers);
         counter--;                                      //remove one
-        //console.log(counter + ' Disconnected: ' + socket.id);
+        console.log(counter + ' Disconnected: ' + user[socket.id]);
     });
     function filter(user){
       let index = activeUsers.indexOf(user);
@@ -38,15 +38,16 @@ io.on('connection', function (socket) {
     }
 
 
-
+//MESSAGE TO ALL//
     socket.on('toAll', (message) => {//observer that waits until the message "toAll" gets passed to the server
-        io.emit("displayMessage", (message));
-        console.log(message + ": " + user.name)
+        io.emit("displayMessage", (user[socket.id] + ": " + message));
+        console.log(message + ": " + user[socket.id])
     });
 
+//MESSAGE TO ME//
     socket.on('toMe', (message) => {//observer that waits until the message "toAll" gets passed to the server
-        socket.emit("displayMessage", (message));
-        console.log(message + ": " + user.name)
+        socket.emit("displayMessage", (user[socket.id] + ": " + message));
+        console.log(message + ": " + user[socket.id])
     });
 });
 
