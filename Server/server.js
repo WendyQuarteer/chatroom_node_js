@@ -12,11 +12,15 @@ server.listen(port, () => {
 let activeUsers = [];
 let counter = 0;//make a counter to find the amount of connected users
 io.on('connection', function (socket) { //Add 1 each time a user connects
-    socket.on('newUser', (userName) =>{
-        activeUsers.push(userName);
+    socket.on('newUser', (userName) => {
+      let user = {
+          id: socket.id,
+          name: userName
+      }
+        activeUsers.push(user);
         io.emit('active', (activeUsers));
-    console.log(counter + ' someone connected :' + userName);
-    counter++;
+        console.log(counter + ' someone connected :' + userName);
+        counter++;
     })
 
     socket.on('disconnect', function () {//remove 1 each time a user connects
@@ -24,12 +28,12 @@ io.on('connection', function (socket) { //Add 1 each time a user connects
         console.log(counter + ' Got disconnected! ' + userName);
     });
 
-    socket.on('toAll', (message) =>{//observer that waits until the message "toAll" gets passed to the server
+    socket.on('toAll', (message) => {//observer that waits until the message "toAll" gets passed to the server
         io.emit("displayMessage", (message));
         console.log(message)
     });
 
-    socket.on('toMe', (message) =>{//observer that waits until the message "toAll" gets passed to the server
+    socket.on('toMe', (message) => {//observer that waits until the message "toAll" gets passed to the server
         socket.emit("displayMessage", (message));
         console.log(message)
     });

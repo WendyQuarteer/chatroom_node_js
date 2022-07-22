@@ -26,12 +26,14 @@ toMe.addEventListener('click', (event) => {//when a button is clicked
 })
 
 socket.on('displayMessage', (message) => {//receive the message back from the server.
-    target.innerHTML += '<li>'+ message + '</li>';
+    target.innerHTML += '<li>'+ message + '</li>';//display the message in the target.
 });
 
 socket.on('active', (activeUsers) => {
-    document.getElementById('allActive').innerHTML = '';
-    document.getElementById('allActive').innerHTML += '<li>'+ activeUsers + '</li>';
+    document.getElementById('allActive').innerHTML = '';//empty the active users.
+    activeUsers.forEach(user => {
+        document.getElementById('allActive').innerHTML += '<li>'+ user.name + '</li>';//add the active users.
+    })
 });
 
 
