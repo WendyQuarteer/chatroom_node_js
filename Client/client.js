@@ -8,7 +8,7 @@ const toMe = document.getElementById("toMe");
 const username = window.prompt("Enter the username");
 socket.emit('newUser', username);
 
-
+//BUTTONS///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //FUNCTION FOR WHEN TO-ALL-BUTTON IS CLICKED:
 toAll.addEventListener('click', (event) => {
 //event.preventDefault() = prevent the page from reloading -> only for form!
@@ -24,17 +24,20 @@ toMe.addEventListener('click', (event) => {//when a button is clicked
     const message = input.value;
     socket.emit('toMe', message);//do an emit to the server
 })
-
+//DISPLAY///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//DISPLAY THE MESSAGE//
 socket.on('displayMessage', (message) => {//receive the message back from the server.
     target.innerHTML += '<li>'+ message + '</li>';//display the message in the target.
 });
-
+//DISPLAY THE ACTIVE USERS//
 socket.on('active', (activeUsers) => {
     document.getElementById('allActive').innerHTML = '';//empty the active users.
     activeUsers.forEach(user => {
-        document.getElementById('allActive').innerHTML += '<li>'+ user.name + '</li>';//add the active users.
+        document.getElementById('allActive').innerHTML += '<li>'+ user + '</li>';//add the active users.
     })
 });
+
+
 
 
 

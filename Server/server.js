@@ -11,31 +11,42 @@ server.listen(port, () => {
 });
 let activeUsers = [];
 let counter = 0;//make a counter to find the amount of connected users
-io.on('connection', function (socket) { //Add 1 each time a user connects
-    socket.on('newUser', (userName) => {
-      let user = {
-          id: socket.id,
-          name: userName
-      }
-        activeUsers.push(user);
-        io.emit('active', (activeUsers));
-        console.log(counter + ' someone connected :' + userName);
-        counter++;
-    })
+let user = {};
+//CONNECT//
+io.on('connection', function (socket) {
+    socket.on('newUser', (userName) => {//receive the data of the new user.
+        user[socket.id] = userName;
+        activeUsers.push(user[socket.id]);               //push the new user in the array of active users.
+        io.emit('active', (activeUsers));               //emit the array of objects to all clients
+        counter++;                                      //add one
+        //console.log(counter + ' Connected: ' + userName);
+        console.log(activeUsers)
 
-    socket.on('disconnect', function () {//remove 1 each time a user connects
-        counter--;
-        console.log(counter + ' Got disconnected! ' + userName);
+    })
+//DISCONNECT//
+    socket.on('disconnecting', () => {
+        console.log(user[socket.id]) //disconnected user
+        filter(user[socket.id]);
+        io.emit ('active', activeUsers);
+        counter--;                                      //remove one
+        //console.log(counter + ' Disconnected: ' + socket.id);
     });
+    function filter(user){
+      let index = activeUsers.indexOf(user);
+      activeUsers.splice(index, 1)
+        return activeUsers;
+    }
+
+
 
     socket.on('toAll', (message) => {//observer that waits until the message "toAll" gets passed to the server
         io.emit("displayMessage", (message));
-        console.log(message)
+        console.log(message + ": " + user.name)
     });
 
     socket.on('toMe', (message) => {//observer that waits until the message "toAll" gets passed to the server
         socket.emit("displayMessage", (message));
-        console.log(message)
+        console.log(message + ": " + user.name)
     });
 });
 
