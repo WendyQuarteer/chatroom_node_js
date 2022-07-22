@@ -9,15 +9,19 @@ const io = require('socket.io')(server);//set-up socket.io in the server
 server.listen(port, () => {
     console.log("server running on " + port);
 });
-
+let activeUsers = [];
 let counter = 0;//make a counter to find the amount of connected users
-io.on('connection', function (socket) { ///Add 1 each time a user connects
-    console.log(counter + ' someone connected');
+io.on('connection', function (socket) { //Add 1 each time a user connects
+    socket.on('newUser', (userName) =>{
+        activeUsers.push(userName);
+        io.emit('active', (activeUsers));
+    console.log(counter + ' someone connected :' + userName);
     counter++;
+    })
 
     socket.on('disconnect', function () {//remove 1 each time a user connects
         counter--;
-        console.log(counter + 'Got disconnect!');
+        console.log(counter + ' Got disconnected! ' + userName);
     });
 
     socket.on('toAll', (message) =>{//observer that waits until the message "toAll" gets passed to the server
