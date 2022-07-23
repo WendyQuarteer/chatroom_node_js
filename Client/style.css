@@ -1,3 +1,36 @@
+body{
+    display: flex;
+}
+
+main {
+    margin: auto;
+    min-height: 100vh;
+}
+
+#background{
+    display: flex;
+    justify-content: center;
+    width: 600px;
+    background-color: orange;
+    padding: 100px;
+}
+
+#messages{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+#active {
+    border: 5px solid deeppink;
+    background-color: greenyellow;
+    width: 250px;
+    color: forestgreen;
+    padding: 10px;
+    margin: 10px 0;
+}
+
 #chatroom{
     border: 5px solid deeppink;
     background-color: forestgreen;
@@ -5,32 +38,30 @@
     padding: 10px;
     margin: 10px 0;
 }
-ul {
 
-}
 #newMessage{
     border: 5px solid forestgreen;
     background-color: deeppink;
+    color: forestgreen;
     padding: 10px;
     margin: 10px 0;
 }
 
 #input{
- width: 550px;
+ width: 400px;
     height: 50px;
 }
 
-#form>button{
-    background: yellowgreen;
+.button {
+    color: greenyellow;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 10px;
+    background-image: linear-gradient(to right,palevioletred, peru, hotpink);
+    box-shadow: purple 5px 5px 15px 5px;
+    border: 2px solid forestgreen;
+    display: inline-block;
 }
 
-#form::after {
-    content: "";
-    clear: both;
-    display: table;
-}
 
-
-
-id new-message div
 

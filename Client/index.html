@@ -9,29 +9,30 @@
     <script src="client.js" defer></script> <!--only do after html loaded-->
 </head>
 <body>
+<main>
+    <h1>Welcome @ Wench-chat</h1>
+<div id="background">
+        <!--display active users-->
+        <div id="active">
+            <h4>Who's active:</h4>
+            <ul class="target" id="allActive"></ul>
+        </div>
 
-<!--display active users-->
-<div id="active">
-    <h2>Who's active:</h2>
-    <ul class="target" id="allActive"></ul>
+    <div id="messages">
+        <!--display previous messages-->
+        <div id="chatroom">
+            <h2>Chat Messages</h2>
+            <ul class="target" id="allMessages"></ul>
+        </div>
+
+        <!--send a new message-->
+        <div id="newMessage">
+            <input id="input" type="text" placeholder="Your message...">
+            <button class="button" type="submit" id="toAll">SEND TO ALL</button>
+            <button class="button" type="submit" id="toMe">SEND TO ME</button>
+        </div>
+    </div>
 </div>
-
-<!--display previous messages-->
-<div id="chatroom">
-    <h2>Chat Messages</h2>
-    <ul class="target" id="allMessages"></ul>
-</div>
-
-<!--send a new message-->
-<div id="newMessage">
-
-        <label for="input">Your Message:</label>
-        <input id="input" type="text" placeholder="Your message...">
-        <button type ="submit" id="toAll">SEND TO ALL</button>
-        <button type ="submit" id="toMe">SEND TO ME</button>
-
-</div>
-
-
+</main>
 </body>
 </html>

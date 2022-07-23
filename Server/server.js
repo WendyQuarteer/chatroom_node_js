@@ -37,7 +37,6 @@ io.on('connection', function (socket) {
         return activeUsers;
     }
 
-
 //MESSAGE TO ALL//
     socket.on('toAll', (message) => {//observer that waits until the message "toAll" gets passed to the server
         io.emit("displayMessage", (user[socket.id] + ": " + message));
@@ -50,11 +49,3 @@ io.on('connection', function (socket) {
         console.log(message + ": " + user[socket.id])
     });
 });
-
-
-
-
-
-
-
-
